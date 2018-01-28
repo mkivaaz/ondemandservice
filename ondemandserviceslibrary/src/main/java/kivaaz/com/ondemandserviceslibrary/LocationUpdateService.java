@@ -63,7 +63,7 @@ public class LocationUpdateService extends Service {
     public void onCreate() {
         super.onCreate();
 
-        showNotification();
+//        showNotification();
 
         mFusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
         createLocationCallback();
@@ -74,14 +74,6 @@ public class LocationUpdateService extends Service {
 
         mServiceHandler = new Handler(handler.getLooper());
     }
-
-    public void setUpdateIntent(String intent_update){
-        this.intent_update = intent_update;// need to initialize this
-    }
-    public void setnotificationContext(Class<?> notificationContext){
-        this.notificationContext = notificationContext;// need to initialize this
-    }
-
 
     @Override
     public IBinder onBind(Intent intent) {
@@ -178,7 +170,7 @@ public class LocationUpdateService extends Service {
 
 //        userId = intent.getStringExtra(DataIntent.USERID_LABEL);
 //        userCountry = intent.getStringExtra(DataIntent.COUNTRYID_LABEL);
-            intent_update = intent.getStringExtra(DataIntent.LOCATION_INTENT);
+        intent_update = intent.getStringExtra(DataIntent.LOCATION_INTENT);
 
         startLocationService();
 
@@ -200,7 +192,6 @@ public class LocationUpdateService extends Service {
     public void onDestroy() {
         stopLocationService();
         mServiceHandler.removeCallbacksAndMessages(null);
-        stopForeground(true);
         stopSelf();
         Log.d("SERVICE: ", "IS STOPPED");
     }
