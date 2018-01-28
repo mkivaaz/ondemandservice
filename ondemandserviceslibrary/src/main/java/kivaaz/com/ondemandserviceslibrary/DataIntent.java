@@ -1,4 +1,4 @@
-package kivaaz.com.on_demand_service;
+package kivaaz.com.ondemandserviceslibrary;
 
 /**
  * Created by Muguntan on 12/20/2017.

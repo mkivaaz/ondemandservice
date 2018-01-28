@@ -1,0 +1,11 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="kivaaz.com.ondemandserviceslibrary" >
+
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <application>
+        <service
+            android:name="kivaaz.com.ondemandserviceslibrary.LocationUpdateService"
+            android:exported="true" />
+    </application>
+</manifest>

@@ -1,4 +1,4 @@
-package kivaaz.com.on_demand_service;
+package kivaaz.com.ondemandserviceslibrary;
 
 import android.app.Notification;
 import android.app.PendingIntent;
