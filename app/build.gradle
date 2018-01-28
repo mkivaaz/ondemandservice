@@ -1,5 +1,7 @@
 apply plugin: 'com.android.application'
 apply plugin: 'com.github.dcendents.android-maven'
+group = 'kivaaz.com'
+version = '1.1'
 
 android {
     compileSdkVersion 26
