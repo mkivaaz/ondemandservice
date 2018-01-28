@@ -12,6 +12,8 @@ public class DataIntent {
     public final static String LOCATION_LONGITUDE = "Location_Longitude";
     public final static String LOCATION_BEARING = "Location_Bearing";
     public final static String LOCATION_STRINGFY = "Location_Code";
+    public final static String LOCATION_NOTIFICATION_CLASS = "Location_Class";
+    public final static String LOCATION_INTENT = "Location_Class";
 
     public final static int LOCATION_PERMISSON_CODE = 1001;
 

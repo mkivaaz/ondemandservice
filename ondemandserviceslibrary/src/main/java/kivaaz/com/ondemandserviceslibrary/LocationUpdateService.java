@@ -178,6 +178,7 @@ public class LocationUpdateService extends Service {
 
 //        userId = intent.getStringExtra(DataIntent.USERID_LABEL);
 //        userCountry = intent.getStringExtra(DataIntent.COUNTRYID_LABEL);
+            intent_update = intent.getStringExtra(DataIntent.LOCATION_INTENT);
 
         startLocationService();
 
@@ -211,7 +212,7 @@ public class LocationUpdateService extends Service {
 
     public void showNotification(){
         Intent notificationIntent = null;
-        notificationIntent = new Intent(this,notificationContext); //add class here
+        notificationIntent = new Intent(this,getClass()); //add class here
         notificationIntent.setAction(getPackageName() + ".Dashboard");
         notificationIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK );
         PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, notificationIntent,0);
