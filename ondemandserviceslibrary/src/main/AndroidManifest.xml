@@ -11,5 +11,8 @@
         android:supportsRtl="true">
         <service
             android:name="kivaaz.com.ondemandserviceslibrary.LocationUpdateService"
+            android:exported="true" />
+        <service
+            android:name="kivaaz.com.ondemandserviceslibrary.FirebaseChat.FirebaseChatUpdater"
             android:exported="true" /></application>
 </manifest>
