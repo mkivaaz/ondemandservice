@@ -20,7 +20,7 @@ import com.google.firebase.auth.FirebaseUser;
 public class LoginActivity extends AppCompatActivity {
     EditText emailET, passwordET;
     CheckBox signupCb, loginCb;
-    Button signupBtn, loginBtn;
+    Button signupBtn, loginBtn,scanBtn,genBtn;
     private FirebaseAuth mAuth;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,6 +37,21 @@ public class LoginActivity extends AppCompatActivity {
 
         signupBtn = findViewById(R.id.signupBTN);
         loginBtn = findViewById(R.id.goBtn);
+        scanBtn= findViewById(R.id.qrScannerBtn);
+        genBtn= findViewById(R.id.qrGenerateBtn);
+
+        scanBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getBaseContext(),BarcodeScanner.class));
+            }
+        });
+        genBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getBaseContext(),QrGeneratorActivity.class));
+            }
+        });
 
         signupCb.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override

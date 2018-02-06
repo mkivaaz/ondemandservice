@@ -12,6 +12,7 @@ public class FirebaseConstants {
 
     public final static String FIREBASE_MESSAGE_TAG = "Chat_Message";
     public final static String BARCODE_DATA = "Barcode_Data";
+    public final static String BARCODE_INTENT = "kivaaz.com..BarcodeScanner";
     public final static String FIREBASE_MESSAGE_SENDER_TAG = "Chat_Sender";
     public final static String FIREBASE_MESSAGE_TIMESTAMP_TAG = "Chat_TimeStamp";
     public final static String FIREBASE_MESSAGE_ID_TAG = "Chat_Message_Id";
