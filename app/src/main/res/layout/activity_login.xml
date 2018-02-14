@@ -1,124 +1,117 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-android:layout_width="match_parent"
-android:layout_height="match_parent">
-
-<LinearLayout
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_gravity="center_vertical"
-    android:orientation="vertical">
+    android:layout_height="match_parent"
+    android:id="@+id/main_layout"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:padding="20dp">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:padding="5dp">
-        <TextView
-            android:layout_width="0dp"
-            android:layout_weight="1"
+        android:layout_gravity="center_vertical"
+        android:orientation="vertical">
+        <Button
+            android:id="@+id/googleSigninBtn"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Email: "/>
-
-        <EditText
-            android:id="@+id/emailET"
-            android:layout_width="0dp"
-            android:layout_weight="2"
-            android:inputType="textEmailAddress"
-            android:layout_height="wrap_content" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:padding="5dp">
-        <TextView
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:text="Password: "/>
-
-        <EditText
-            android:id="@+id/passET"
-            android:layout_width="0dp"
-            android:layout_weight="2"
-            android:inputType="textPassword"
-            android:layout_height="wrap_content"
+            android:text="Sign In with Google"
             />
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-
-        <CheckBox
-            android:id="@+id/signupCB"
-            android:layout_gravity="center_vertical"
-            android:text="Sign Up"
-            android:checked="true"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-
-        <CheckBox
-            android:id="@+id/loginCB"
-            android:layout_gravity="center_vertical"
-            android:text="Login"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
 
         <Button
-            android:id="@+id/goBtn"
-            android:layout_gravity="center_vertical"
+            android:id="@+id/fbLoginBtn"
+            android:layout_width="match_parent"
+            android:text="Sign in with Facebook"
+            android:background="@color/metallicBlue"
+            android:textColor="@color/white"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp" />
+
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Login"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="20dp"
-            android:textColor="#FFFFFF"
-            android:visibility="gone"
-            android:background="#338866"/>
-        <Button
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="20dp"
-            android:id="@+id/signupBTN"
-            android:layout_gravity="center_vertical"
+            android:orientation="horizontal"
+            android:padding="5dp">
+            <TextView
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:text="Email: "/>
+
+            <EditText
+                android:id="@+id/emailET"
+                android:layout_width="0dp"
+                android:layout_weight="2"
+                android:inputType="textEmailAddress"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="SignUp"
-            android:textColor="#FFFFFF"
-            android:background="#338866"/>
-    </LinearLayout>
+            android:orientation="horizontal"
+            android:padding="5dp">
+            <TextView
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:text="Password: "/>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:gravity="center">
-        <Button
-            android:padding="15dp"
-            android:id="@+id/qrScannerBtn"
-            android:layout_marginTop="20dp"
-            android:layout_gravity="center"
-            android:layout_width="wrap_content"
+            <EditText
+                android:id="@+id/passET"
+                android:layout_width="0dp"
+                android:layout_weight="2"
+                android:inputType="textPassword"
+                android:layout_height="wrap_content"
+                />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="QR Scanner"/>
-        <Button
-            android:padding="15dp"
-            android:id="@+id/qrGenerateBtn"
-            android:layout_marginTop="20dp"
-            android:layout_gravity="center"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="QR Generator"/>
+            android:orientation="horizontal">
+
+            <CheckBox
+                android:id="@+id/signupCB"
+                android:layout_gravity="center_vertical"
+                android:text="Sign Up"
+                android:checked="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <CheckBox
+                android:id="@+id/loginCB"
+                android:layout_gravity="center_vertical"
+                android:text="Login"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <Button
+                android:id="@+id/goBtn"
+                android:layout_gravity="center_vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Login"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:textColor="#FFFFFF"
+                android:visibility="gone"
+                android:background="#338866"/>
+            <Button
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:id="@+id/signupBTN"
+                android:layout_gravity="center_vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="SignUp"
+                android:textColor="#FFFFFF"
+                android:background="#338866"/>
+        </LinearLayout>
+
+
+
     </LinearLayout>
-
-
-
-</LinearLayout>
-
-
 
 </LinearLayout>

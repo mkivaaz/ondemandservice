@@ -3,4 +3,9 @@
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
+    <color name="metallicBlue">#335588</color>
+    <color name="metallicGreen">#559922</color>
+    <color name="white">#EEEEEE</color>
+    <color name="gray">#CCCC</color>
+    <color name="leafy">#34722F</color>
 </resources>

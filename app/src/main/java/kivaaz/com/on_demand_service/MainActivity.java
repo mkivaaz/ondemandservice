@@ -7,22 +7,25 @@ import android.content.IntentFilter;
 import android.os.Bundle;
 import android.support.v4.content.LocalBroadcastManager;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageButton;
-import android.widget.ListAdapter;
-import android.widget.ListView;
-import android.widget.TextView;
 import android.widget.Toast;
 
-import com.firebase.ui.database.FirebaseListAdapter;
-import com.firebase.ui.database.FirebaseListOptions;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import kivaaz.com.ondemandserviceslibrary.FirebaseChat.FirebaseChatMessage;
 import kivaaz.com.ondemandserviceslibrary.FirebaseChat.FirebaseChatUpdater;
@@ -30,7 +33,7 @@ import kivaaz.com.ondemandserviceslibrary.FirebaseChat.FirebaseConstants;
 
 public class MainActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
-    ListView chatList;
+    RecyclerView chatList;
     EditText messageET, roomIdET;
     ImageButton sendBtn, setRoomBtn;
     FirebaseDatabase database;
@@ -51,55 +54,45 @@ public class MainActivity extends AppCompatActivity {
         sendBtn = findViewById(R.id.sendBtn);
         setRoomBtn = findViewById(R.id.setRoomBtn);
         chatService = new Intent(getBaseContext(), FirebaseChatUpdater.class);
-
-        if(isRoomIDSet){
-            myRef = database.getReference(firebaseDir + "-ChatGroup");
-            FirebaseListOptions<FirebaseChatMessage> options = new FirebaseListOptions.Builder<FirebaseChatMessage>()
-                    .setQuery(myRef, FirebaseChatMessage.class)
-                    .setLayout(R.layout.message_adapter)
-                    .build();
-            ListAdapter adapter = new FirebaseListAdapter<FirebaseChatMessage>(options) {
-                @Override
-                protected void populateView(View v, FirebaseChatMessage model, int position) {
-                    TextView message = v.findViewById(R.id.message_text);
-                    TextView messagesender = v.findViewById(R.id.message_user);
-                    message.setText(model.getMessage());
-                    message.setText(model.getMessageSender());
-                }
-
-            };
-            chatList.setAdapter(adapter);
-        }
-
-
-
         setRoomBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if (!isRoomIDSet){
                     firebaseDir = roomIdET.getText().toString().trim();
                     roomIdET.setEnabled(false);
-                    setRoomBtn.setImageDrawable(getResources().getDrawable(R.drawable.ic_backspace));
+                    setRoomBtn.setImageDrawable(getResources().getDrawable(R.drawable.ic_cancel));
                     isRoomIDSet = !isRoomIDSet;
 
                     chatService.putExtra(FirebaseConstants.FIREBASE_CHAT_GROUP_TAG,firebaseDir + "-ChatGroup");
                     startService(chatService);
                     myRef = database.getReference(firebaseDir + "-ChatGroup");
-                    FirebaseListOptions<FirebaseChatMessage> options = new FirebaseListOptions.Builder<FirebaseChatMessage>()
-                            .setQuery(myRef, FirebaseChatMessage.class)
-                            .setLayout(R.layout.message_adapter)
-                            .build();
-                    ListAdapter adapter = new FirebaseListAdapter<FirebaseChatMessage>(options) {
+                    myRef.addValueEventListener(new ValueEventListener() {
                         @Override
-                        protected void populateView(View v, FirebaseChatMessage model, int position) {
-                            TextView message = v.findViewById(R.id.message_text);
-                            TextView messagesender = v.findViewById(R.id.message_user);
-                            message.setText("hello");
-                            messagesender.setText(model.getMessageSender());
+                        public void onDataChange(DataSnapshot dataSnapshot) {
+                            List<FirebaseChatMessage> messageList = new ArrayList<>();
+                            int position = 0;
+                            for(DataSnapshot snapshot : dataSnapshot.getChildren()){
+                                FirebaseChatMessage message = snapshot.getValue(FirebaseChatMessage.class);
+                                position++;
+                                messageList.add(message);
+                                Log.d("FIREBASEMESSAGE: ",message.getMessage());
+                            }
+                            if(messageList.size() != 0){
+                                LinearLayoutManager layoutManager = new LinearLayoutManager(getBaseContext(),LinearLayoutManager.VERTICAL,false);
+                                ChatListAdapter adapter = new ChatListAdapter(getBaseContext(),messageList,currentUser.getEmail());
+                                chatList.setLayoutManager(layoutManager);
+                                chatList.setAdapter(adapter);
+                                chatList.smoothScrollToPosition(position);
+                            }
+
                         }
 
-                    };
-                    chatList.setAdapter(adapter);
+                        @Override
+                        public void onCancelled(DatabaseError databaseError) {
+
+                        }
+                    });
+
                 }else {
                     roomIdET.setText("");
                     roomIdET.setEnabled(true);
@@ -116,7 +109,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 if(isRoomIDSet){
                     myRef = database.getReference(firebaseDir + "-ChatGroup");
-                    FirebaseChatMessage chatMessage = new FirebaseChatMessage(messageET.getText().toString(),currentUser.getEmail(), new Date().getTime(),
+                    FirebaseChatMessage chatMessage = new FirebaseChatMessage(messageET.getText().toString(),mAuth.getCurrentUser().getEmail(), new Date().getTime(),
                             "False");
                     String pushKey = myRef.push().getKey();
                     chatMessage.setMessageID(pushKey);
@@ -136,7 +129,7 @@ public class MainActivity extends AppCompatActivity {
             String message = intent.getStringExtra(FirebaseConstants.FIREBASE_MESSAGE_TAG);
             String messageId = intent.getStringExtra(FirebaseConstants.FIREBASE_MESSAGE_ID_TAG);
             database.getReference(firebaseDir + "-ChatGroup/" + messageId + "/isNotified").setValue("True");
-            Toast.makeText(getBaseContext(),"Message: " + message,Toast.LENGTH_SHORT).show();
+            Toast.makeText(getBaseContext(),"There's a New Message",Toast.LENGTH_SHORT).show();
         }
     };
     @Override

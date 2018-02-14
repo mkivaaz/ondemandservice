@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">on-demand-service</string>
+    <string name="facebook_app_id">396471924114003</string>
+    <string name="fb_login_protocol_scheme">fb396471924114003</string>
 </resources>

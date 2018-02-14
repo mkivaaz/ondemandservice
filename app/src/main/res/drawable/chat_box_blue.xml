@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:width="200dp"
+        android:height="100dp"
+        android:top="10dp"
+        >
+        <shape xmlns:android="http://schemas.android.com/apk/res/android"
+            android:shape="rectangle">
+            <solid
+                android:color="@color/metallicBlue">
+            </solid>
+            <corners android:radius="5dp"></corners>
+        </shape>
+    </item>
+    <item
+        android:width="30dp"
+        android:height="20dp"
+        android:top="15dp"
+        android:left="200dp">
+        <vector xmlns:android="http://schemas.android.com/apk/res/android"
+            android:height="100dp"
+            android:width="100dp"
+            android:viewportHeight="80"
+            android:viewportWidth="80" >
+            <group
+                android:name="triableGroup">
+                <path
+                    android:name="triangle"
+                    android:fillColor="@color/metallicBlue"
+                    android:pathData="m 0,10 l 0,100 60,-60 z" />
+            </group>
+        </vector>
+    </item>
+</layer-list>
+
