@@ -1,10 +1,10 @@
-package kivaaz.com.ondemandserviceslibrary;
+package kivaaz.com.ondemandserviceslibrary.UserData;
 
 /**
  * Created by Muguntan on 2/21/2018.
  */
 
-public class UserData {
+public class SellerData {
 
     String company_Name;
     String company_imgURL;
@@ -21,17 +21,17 @@ public class UserData {
     String ic_imgURL;
     String icSelfie_imgURL;
 
-    public UserData() {
+    public SellerData() {
     }
 
-    public UserData(String company_Name, String company_address, String company_About, String ssm_RegisterNo, String firstName, String lastName, String email, String mobileNo, String dateOfBirth, String ic_No) {
+    public SellerData(String company_Name, String company_address, String company_About, String company_imgURL, String ssm_RegisterNo, String firstName, String lastName, String mobileNo, String dateOfBirth, String ic_No) {
         this.company_Name = company_Name;
         this.company_address = company_address;
         this.company_About = company_About;
+        this.company_imgURL = company_imgURL;
         this.ssm_RegisterNo = ssm_RegisterNo;
         this.firstName = firstName;
         this.lastName = lastName;
-        this.email = email;
         this.mobileNo = mobileNo;
         this.dateOfBirth = dateOfBirth;
         this.ic_No = ic_No;

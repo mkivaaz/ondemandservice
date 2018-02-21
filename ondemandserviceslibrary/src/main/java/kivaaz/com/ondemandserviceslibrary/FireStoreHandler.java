@@ -11,6 +11,10 @@ import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import java.util.List;
+
+import kivaaz.com.ondemandserviceslibrary.UserData.SellerData;
+
 /**
  * Created by Muguntan on 2/21/2018.
  */
@@ -25,14 +29,12 @@ public class FireStoreHandler {
         this.db = db;
     }
 
-    public void addNewUser(String email, String name, String mobileNo, String address){
-        UserData userData = new UserData();
-        userData.setFirstName(name);
-        userData.setEmail(email);
-        userData.setCompany_address(address);
-        userData.setMobileNo(mobileNo);
+    public void addNewUser(String email, String name){
+        SellerData sellerData = new SellerData();
+        sellerData.setFirstName(name);
+        sellerData.setEmail(email);
 
-        db.collection("Buyer").document(email).set(userData)
+        db.collection("Buyer").document(email).set(sellerData)
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void aVoid) {
@@ -55,7 +57,7 @@ public class FireStoreHandler {
         user.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
             @Override
             public void onSuccess(DocumentSnapshot documentSnapshot) {
-                UserData userData = documentSnapshot.toObject(UserData.class);
+                SellerData sellerData = documentSnapshot.toObject(SellerData.class);
 
             }
         })
@@ -64,5 +66,32 @@ public class FireStoreHandler {
                     public void onFailure(@NonNull Exception e) {
                     }
                 });
+    }
+
+    public void updateUserDetails(List<String> userData) {
+        String company_name = userData.get(0).toString();
+        String company_address = userData.get(1).toString();
+        String company_about = userData.get(2).toString();
+        String company_imgURL = userData.get(3).toString();
+        String ssm_regisNo = userData.get(4).toString();
+        String firstName = userData.get(5).toString();
+        String lastName = userData.get(6).toString();
+        String email = userData.get(7).toString();
+        String mobileNo = userData.get(8).toString();
+        String dateOfBirth = userData.get(9).toString();
+        String ic_No = userData.get(10).toString();
+
+        DocumentReference user = db.collection("Buyer").document(email);
+        user.update("company_Name", company_name,
+                "company_address", company_address,
+                    "company_About", company_about,
+                    "company_imgURL",company_imgURL,
+                    "ssm_RegisterNo", ssm_regisNo,
+                    "firstName", firstName,
+                    "lastName", lastName,
+                    "mobileNo", mobileNo,
+                    "dateOfBirth", dateOfBirth,
+                    "ic_No",ic_No
+        );
     }
 }

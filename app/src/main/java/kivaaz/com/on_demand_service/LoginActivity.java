@@ -245,7 +245,7 @@ public class LoginActivity extends AppCompatActivity {
                     @Override
                     public void onSuccess(AuthResult authResult) {
                         FirebaseUser user = mAuth.getCurrentUser();
-                        handler.addNewUser(email,nickname,mobile,address);
+                        handler.addNewUser(email,nickname);
                         startActivity(new Intent(getApplicationContext(),MainActivity.class));
                     }
                 }).addOnFailureListener(new OnFailureListener() {
