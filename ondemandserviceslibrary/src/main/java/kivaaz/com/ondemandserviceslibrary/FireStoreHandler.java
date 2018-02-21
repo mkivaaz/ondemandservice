@@ -31,12 +31,9 @@ public class FireStoreHandler {
         this.db = db;
     }
 
-    public void addNewUser(String email, String name, String type){
-        SellerData sellerData = new SellerData();
-        sellerData.setFirstName(name);
-        sellerData.setEmail(email);
+    public void addNewUser(SellerData data, String type){
 
-        db.collection(type).document(email).set(sellerData,SetOptions.merge())
+        db.collection(type).document(data.getEmail()).set(data,SetOptions.merge())
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void aVoid) {
@@ -56,8 +53,8 @@ public class FireStoreHandler {
 
     }
 
-    public void checkandSetUser(final String email, final String name, final String type) {
-        DocumentReference user = db.collection(type).document(email);
+    public void checkandSetUser(final SellerData data, final String type) {
+        DocumentReference user = db.collection(type).document(data.getEmail());
 
         user.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
             @Override
@@ -68,7 +65,7 @@ public class FireStoreHandler {
 
                 }else{
                     accountExists = false;
-                    addNewUser(email,name,type);
+                    addNewUser(data,type);
                 }
 
 
