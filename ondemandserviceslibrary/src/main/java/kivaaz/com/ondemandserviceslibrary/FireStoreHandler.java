@@ -27,9 +27,9 @@ public class FireStoreHandler {
 
     public void addNewUser(String email, String name, String mobileNo, String address){
         UserData userData = new UserData();
-        userData.setName(name);
+        userData.setFirstName(name);
         userData.setEmail(email);
-        userData.setAddress(address);
+        userData.setCompany_address(address);
         userData.setMobileNo(mobileNo);
 
         db.collection("Buyer").document(email).set(userData)
