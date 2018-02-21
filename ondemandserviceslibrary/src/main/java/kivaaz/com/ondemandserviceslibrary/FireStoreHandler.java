@@ -34,38 +34,50 @@ public class FireStoreHandler {
         SellerData sellerData = new SellerData();
         sellerData.setFirstName(name);
         sellerData.setEmail(email);
-        db.collection("Buyer").document(email).set(sellerData,SetOptions.merge())
-                .addOnSuccessListener(new OnSuccessListener<Void>() {
-                    @Override
-                    public void onSuccess(Void aVoid) {
-                        Toast.makeText(context, "User Registered",
-                                Toast.LENGTH_SHORT).show();
-                    }
-                })
-                .addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        Toast.makeText(context, "ERROR" +e.toString(),
-                                Toast.LENGTH_SHORT).show();
-                        Log.d("TAG", e.toString());
-                    }
-                });
+
+        Boolean accountExist = readSingleUser(email);
+
+        if(!accountExist){
+            db.collection("Buyer").document(email).set(sellerData,SetOptions.merge())
+                    .addOnSuccessListener(new OnSuccessListener<Void>() {
+                        @Override
+                        public void onSuccess(Void aVoid) {
+                            Toast.makeText(context, "User Registered",
+                                    Toast.LENGTH_SHORT).show();
+                        }
+                    })
+                    .addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            Toast.makeText(context, "ERROR" +e.toString(),
+                                    Toast.LENGTH_SHORT).show();
+                            Log.d("TAG", e.toString());
+                        }
+                    });
+        }
+
+
     }
 
-    public void ReadSingleUser(String email) {
+    public boolean readSingleUser(String email) {
+        final Boolean[] accountExists = new Boolean[1];
         DocumentReference user = db.collection("Buyer").document(email);
         user.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
             @Override
             public void onSuccess(DocumentSnapshot documentSnapshot) {
                 SellerData sellerData = documentSnapshot.toObject(SellerData.class);
+                accountExists[0] = true;
 
             }
         })
-                .addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                    }
-                });
+        .addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Log.d("ACCOUNT EXISTS: ", "TRUE");
+                accountExists[0] = false;
+            }
+        });
+        return accountExists[0];
     }
 
     public void updateUserDetails(List<String> userData) {
