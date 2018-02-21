@@ -103,31 +103,22 @@ public class FireStoreHandler {
 
     }
 
-    public void updateUserDetails(List<String> userData) {
-        String company_name = userData.get(0).toString();
-        String company_address = userData.get(1).toString();
-        String company_about = userData.get(2).toString();
-        String company_imgURL = userData.get(3).toString();
-        String ssm_regisNo = userData.get(4).toString();
-        String firstName = userData.get(5).toString();
-        String lastName = userData.get(6).toString();
-        String email = userData.get(7).toString();
-        String mobileNo = userData.get(8).toString();
-        String dateOfBirth = userData.get(9).toString();
-        String ic_No = userData.get(10).toString();
+    public void updateUserDetails(List<String> userData, String type) {
+        String company_name = ((String)userData.get(0)).toString();
+        String companyaddress = ((String)userData.get(1)).toString();
+        String company_about = ((String)userData.get(2)).toString();
+        String company_imgURL = ((String)userData.get(3));
+        String ssm_regisNo = ((String)userData.get(4)).toString();
+        String firstName = ((String)userData.get(5)).toString();
+        String lastName = ((String)userData.get(6)).toString();
+        String email2 = ((String)userData.get(7)).toString();
+        String mobileNo = ((String)userData.get(8)).toString();
+        String dateOfBirth = ((String)userData.get(9)).toString();
+        String ic_No = ((String)userData.get(10)).toString();
+        DocumentReference user = db.collection(type).document(email2);
+        user.update("company_Name", company_name, "company_address", companyaddress, "company_About", company_about, "company_imgURL", company_imgURL, "ssm_RegisterNo", ssm_regisNo, "firstName", firstName, "lastName", lastName, "mobileNo", mobileNo, "dateOfBirth", dateOfBirth, "ic_No", ic_No);
+        Toast.makeText(context,"Info Saved Successfully",Toast.LENGTH_SHORT).show();
 
-        DocumentReference user = db.collection("Buyer").document(email);
-        user.update("company_Name", company_name,
-                "company_address", company_address,
-                    "company_About", company_about,
-                    "company_imgURL",company_imgURL,
-                    "ssm_RegisterNo", ssm_regisNo,
-                    "firstName", firstName,
-                    "lastName", lastName,
-                    "mobileNo", mobileNo,
-                    "dateOfBirth", dateOfBirth,
-                    "ic_No",ic_No
-        );
     }
 
     public SellerData getSellerData() {

@@ -11,6 +11,7 @@ public class SellerData {
     String company_address;
     String company_About;
     String ssm_RegisterNo;
+    String gstNo;
     String ssm_imgURL;
     String firstName;
     String lastName;
@@ -147,5 +148,13 @@ public class SellerData {
 
     public void setIcSelfie_imgURL(String icSelfie_imgURL) {
         this.icSelfie_imgURL = icSelfie_imgURL;
+    }
+
+    public String getGstNo() {
+        return gstNo;
+    }
+
+    public void setGstNo(String gstNo) {
+        this.gstNo = gstNo;
     }
 }
