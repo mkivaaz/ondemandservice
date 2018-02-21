@@ -24,7 +24,7 @@ public class FireStoreHandler {
 
     Context context;
     FirebaseFirestore db;
-
+    Boolean accountExists = false;
     public FireStoreHandler(Context context, FirebaseFirestore db) {
         this.context = context;
         this.db = db;
@@ -35,41 +35,39 @@ public class FireStoreHandler {
         sellerData.setFirstName(name);
         sellerData.setEmail(email);
 
-        SellerData accountExist = readSingleUser(email,type);
-
-        if(accountExist == null){
-            db.collection(type).document(email).set(sellerData,SetOptions.merge())
-                    .addOnSuccessListener(new OnSuccessListener<Void>() {
-                        @Override
-                        public void onSuccess(Void aVoid) {
-                            Toast.makeText(context, "User Registered",
-                                    Toast.LENGTH_SHORT).show();
-                        }
-                    })
-                    .addOnFailureListener(new OnFailureListener() {
-                        @Override
-                        public void onFailure(@NonNull Exception e) {
-                            Toast.makeText(context, "ERROR" +e.toString(),
-                                    Toast.LENGTH_SHORT).show();
-                            Log.d("TAG", e.toString());
-                        }
-                    });
-        }
+        db.collection(type).document(email).set(sellerData,SetOptions.merge())
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                        Toast.makeText(context, "User Registered",
+                                Toast.LENGTH_SHORT).show();
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Toast.makeText(context, "ERROR" +e.toString(),
+                                Toast.LENGTH_SHORT).show();
+                        Log.d("TAG", e.toString());
+                    }
+                });
 
 
     }
 
-    public SellerData readSingleUser(String email, String type) {
+    public void checkandSetUser(final String email, final String name, final String type) {
         DocumentReference user = db.collection(type).document(email);
-        final SellerData[] sellerData = {null};
+
         user.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
             @Override
             public void onSuccess(DocumentSnapshot documentSnapshot) {
                 if (documentSnapshot.exists()){
-                    sellerData[0] = documentSnapshot.toObject(SellerData.class);
-                    Log.d("ACCOUNT EXISTS: ", "False");
+                    SellerData sellerData = documentSnapshot.toObject(SellerData.class);
+                    accountExists = true;
+
                 }else{
-                    sellerData[0] = null;
+                    accountExists = false;
+                    addNewUser(email,name,type);
                 }
 
 
@@ -81,7 +79,8 @@ public class FireStoreHandler {
                 Log.d("ACCOUNT EXISTS: ", e.getMessage());
             }
         });
-        return sellerData[0];
+        Log.d("ACCOUNT EXISTS: ", String.valueOf(accountExists));
+
     }
 
     public void updateUserDetails(List<String> userData) {
