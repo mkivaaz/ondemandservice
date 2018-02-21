@@ -90,7 +90,7 @@ public class LocationUpdateService extends Service {
     private void onGetLocation(Location locations) {
         if (locations != null){
 
-            Intent intent = new Intent(intent_update);
+            Intent intent = new Intent(DataIntent.CURRENT_GEOCODE_INTENT);
             intent.putExtra(DataIntent.LOCATION_LATITUDE,locations.getLatitude());
             intent.putExtra(DataIntent.LOCATION_LONGITUDE,locations.getLongitude());
 
@@ -170,7 +170,7 @@ public class LocationUpdateService extends Service {
 
 //        userId = intent.getStringExtra(DataIntent.USERID_LABEL);
 //        userCountry = intent.getStringExtra(DataIntent.COUNTRYID_LABEL);
-        intent_update = intent.getStringExtra(DataIntent.LOCATION_INTENT);
+//        intent_update = intent.getStringExtra(DataIntent.LOCATION_INTENT);
 
         startLocationService();
 
@@ -218,42 +218,5 @@ public class LocationUpdateService extends Service {
         startForeground(1992,notification);
     }
 
-//    public void sendLocationReq(String userId, String userCountry, double latitude, double longitude){
-//        final JSONObject jsonData = new JSONObject();
-//        try {
-//            jsonData.put("uid",userId);
-//            jsonData.put("lat",latitude);
-//            jsonData.put("lng", longitude);
-//            jsonData.put("typeset","ONLINE");
-//            jsonData.put("country", userCountry);
-//            Log.d("LocationData: ",jsonData.toString());
-//        } catch (JSONException e) {
-//            e.printStackTrace();
-//        }
-//
-//        if(jsonData.length() != 0){
-//            JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, DataIntent.URL_FOR_TRACKING, jsonData, new Response.Listener<JSONObject>() {
-//                @Override
-//                public void onResponse(JSONObject jsonObject) {
-//                    Log.d("DATA SENT: ", jsonObject.toString());
-//                }
-//            }, new Response.ErrorListener() {
-//                @Override
-//                public void onErrorResponse(VolleyError volleyError) {
-//
-//                }
-//            }){
-//                @Override
-//                public Map<String, String> getHeaders() throws AuthFailureError {
-//                    HashMap<String, String> headers = new HashMap<String, String>();
-//                    headers.put("Content-Type", "application/json");
-//                    headers.put("User-Agent", "Mozilla/5.0 (Linux; Android 5.0; SM-G900P Build/LRX21T) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/62.0.3202.94 Mobile Safari/537.36");
-//                    return super.getHeaders();
-//                }
-//            };
-//
-//            Volley.newRequestQueue(getBaseContext()).add(jsonObjectRequest);
-//        }
-//    }
 
 }

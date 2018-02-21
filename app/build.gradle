@@ -30,10 +30,14 @@ dependencies {
     androidTestImplementation 'com.android.support.test:runner:1.0.1'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
     implementation project(':ondemandserviceslibrary')
-
+    implementation 'com.firebase:geofire-android:2.3.0'
     implementation 'com.facebook.android:facebook-android-sdk:[4,5)'
     implementation 'com.google.android.gms:play-services-auth:11.8.0'
+    implementation 'com.google.android.gms:play-services-maps:11.8.0'
+    compile 'com.google.firebase:firebase-firestore:11.8.0'
+    
 }
+
 
 
 

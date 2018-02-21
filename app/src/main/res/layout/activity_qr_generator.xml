@@ -24,6 +24,7 @@
         android:layout_height="wrap_content"
         android:text="Generate"/>
     <Button
+        android:visibility="gone"
         android:id="@+id/storeBtn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

@@ -15,6 +15,7 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.facebook.AccessToken;
@@ -41,16 +42,20 @@ import com.google.firebase.auth.FacebookAuthProvider;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.Arrays;
 
+import kivaaz.com.ondemandserviceslibrary.FireStoreHandler;
+
 public class LoginActivity extends AppCompatActivity {
     private static final int RC_SIGN_IN = 2;
-    EditText emailET, passwordET;
+    EditText emailET, passwordET, addressET, nicknameET, mobileET;
+    LinearLayout addressLayout, nicknameLayout, mobileLayout;
     CheckBox signupCb, loginCb;
-    Button signupBtn, loginBtn;
+    Button signupBtn, loginBtn, qrScnBtn, qrGenBtn;
     Button fbLoginBtn;
     Button googleLoginBtn;
     FirebaseAuth mAuth;
@@ -58,6 +63,9 @@ public class LoginActivity extends AppCompatActivity {
     CallbackManager callbackManager;
     Boolean isGoogleSignedIn = false;
     Boolean isFacebookSignedIn = false;
+
+    FirebaseFirestore db;
+    FireStoreHandler handler;
 
     FirebaseAuth.AuthStateListener authStateListener;
     private String TAG = "kivaaz.com.on_demand_service";
@@ -73,16 +81,43 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         mAuth = FirebaseAuth.getInstance();
+        db = FirebaseFirestore.getInstance();
 
         emailET = findViewById(R.id.emailET);
         passwordET = findViewById(R.id.passET);
+        nicknameET = findViewById(R.id.nameET);
+        addressET = findViewById(R.id.addressET);
+        mobileET = findViewById(R.id.mobileET);
+
+        nicknameLayout = findViewById(R.id.nickNameLayout);
+        addressLayout = findViewById(R.id.addressayout);
+        mobileLayout = findViewById(R.id.mobileLayout);
 
         signupCb = findViewById(R.id.signupCB);
         loginCb = findViewById(R.id.loginCB);
         signupBtn = findViewById(R.id.signupBTN);
         loginBtn = findViewById(R.id.goBtn);
         fbLoginBtn = findViewById(R.id.fbLoginBtn);
-        printHashKey();
+
+        qrGenBtn = findViewById(R.id.qrGenBtn);
+        qrScnBtn = findViewById(R.id.qrScnBtn);
+
+        handler = new FireStoreHandler(getBaseContext(), db);
+
+        qrGenBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getBaseContext(), QrGeneratorActivity.class));
+            }
+        });
+
+        qrScnBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getBaseContext(), BarcodeScanner.class));
+            }
+        });
+
         //Google SignIn Stuffs
         googleLoginBtn = findViewById(R.id.googleSigninBtn);
         googleLoginBtn.setOnClickListener(new View.OnClickListener() {
@@ -175,6 +210,9 @@ public class LoginActivity extends AppCompatActivity {
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
                 if(b == true){
                     loginCb.setChecked(false);
+                    nicknameLayout.setVisibility(View.VISIBLE);
+                    addressLayout.setVisibility(View.VISIBLE);
+                    mobileLayout.setVisibility(View.VISIBLE);
                     signupBtn.setVisibility(View.VISIBLE);
                     loginBtn.setVisibility(View.GONE);
                 }
@@ -185,6 +223,9 @@ public class LoginActivity extends AppCompatActivity {
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
                 if(b == true){
                     signupCb.setChecked(false);
+                    nicknameLayout.setVisibility(View.GONE);
+                    addressLayout.setVisibility(View.GONE);
+                    mobileLayout.setVisibility(View.GONE);
                     signupBtn.setVisibility(View.GONE);
                     loginBtn.setVisibility(View.VISIBLE);
                 }
@@ -194,13 +235,17 @@ public class LoginActivity extends AppCompatActivity {
         signupBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String email = emailET.getText().toString().trim();
-                final String password = passwordET.getText().toString().trim();
+                final String email = emailET.getText().toString().trim();
+                String password = passwordET.getText().toString().trim();
+                final String nickname = nicknameET.getText().toString().trim();
+                final String address = addressET.getText().toString().trim();
+                final String mobile = mobileET.getText().toString().trim();
 
                 mAuth.createUserWithEmailAndPassword(email,password).addOnSuccessListener(new OnSuccessListener<AuthResult>() {
                     @Override
                     public void onSuccess(AuthResult authResult) {
                         FirebaseUser user = mAuth.getCurrentUser();
+                        handler.addNewUser(email,nickname,mobile,address);
                         startActivity(new Intent(getApplicationContext(),MainActivity.class));
                     }
                 }).addOnFailureListener(new OnFailureListener() {
@@ -237,6 +282,8 @@ public class LoginActivity extends AppCompatActivity {
 
 
     }
+
+
     private void firebaseAuthWithGoogle(GoogleSignInAccount acct) {
         Log.d(TAG, "firebaseAuthWithGoogle:" + acct.getId());
 
@@ -339,4 +386,6 @@ public class LoginActivity extends AppCompatActivity {
             e.printStackTrace();
         }
     }
+
+
 }

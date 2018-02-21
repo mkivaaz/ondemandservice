@@ -10,7 +10,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Toast;
@@ -36,6 +38,7 @@ public class MainActivity extends AppCompatActivity {
     RecyclerView chatList;
     EditText messageET, roomIdET;
     ImageButton sendBtn, setRoomBtn;
+    Button registRest;
     FirebaseDatabase database;
     DatabaseReference myRef;
     boolean isRoomIDSet = false;
@@ -53,6 +56,15 @@ public class MainActivity extends AppCompatActivity {
         roomIdET = findViewById(R.id.roomIdET);
         sendBtn = findViewById(R.id.sendBtn);
         setRoomBtn = findViewById(R.id.setRoomBtn);
+        registRest = findViewById(R.id.Regi_Rest);
+
+        registRest.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getBaseContext(),StoreRestaurantActivity.class));
+            }
+        });
+
         chatService = new Intent(getBaseContext(), FirebaseChatUpdater.class);
         setRoomBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -129,7 +141,9 @@ public class MainActivity extends AppCompatActivity {
             String message = intent.getStringExtra(FirebaseConstants.FIREBASE_MESSAGE_TAG);
             String messageId = intent.getStringExtra(FirebaseConstants.FIREBASE_MESSAGE_ID_TAG);
             database.getReference(firebaseDir + "-ChatGroup/" + messageId + "/isNotified").setValue("True");
-            Toast.makeText(getBaseContext(),"There's a New Message",Toast.LENGTH_SHORT).show();
+            Toast toast = Toast.makeText(getBaseContext(),"There's a New Message",Toast.LENGTH_SHORT);
+            toast.setGravity(Gravity.TOP| Gravity.CENTER_HORIZONTAL, 0, 20);
+            toast.show();
         }
     };
     @Override
