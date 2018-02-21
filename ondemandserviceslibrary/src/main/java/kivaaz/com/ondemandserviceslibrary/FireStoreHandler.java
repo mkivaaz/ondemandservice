@@ -24,7 +24,7 @@ public class FireStoreHandler {
 
     Context context;
     FirebaseFirestore db;
-    SellerData sellerData = null;
+
     public FireStoreHandler(Context context, FirebaseFirestore db) {
         this.context = context;
         this.db = db;
@@ -61,14 +61,15 @@ public class FireStoreHandler {
 
     public SellerData readSingleUser(String email, String type) {
         DocumentReference user = db.collection(type).document(email);
+        final SellerData[] sellerData = {null};
         user.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
             @Override
             public void onSuccess(DocumentSnapshot documentSnapshot) {
                 if (documentSnapshot.exists()){
-                    sellerData = documentSnapshot.toObject(SellerData.class);
+                    sellerData[0] = documentSnapshot.toObject(SellerData.class);
                     Log.d("ACCOUNT EXISTS: ", "False");
                 }else{
-                    sellerData = null;
+                    sellerData[0] = null;
                 }
 
 
@@ -80,7 +81,7 @@ public class FireStoreHandler {
                 Log.d("ACCOUNT EXISTS: ", e.getMessage());
             }
         });
-        return sellerData;
+        return sellerData[0];
     }
 
     public void updateUserDetails(List<String> userData) {
