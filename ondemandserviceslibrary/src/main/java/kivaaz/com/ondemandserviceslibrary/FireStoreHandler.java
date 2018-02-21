@@ -25,6 +25,7 @@ public class FireStoreHandler {
     Context context;
     FirebaseFirestore db;
     Boolean accountExists = false;
+    SellerData sellerData;
     public FireStoreHandler(Context context, FirebaseFirestore db) {
         this.context = context;
         this.db = db;
@@ -62,7 +63,7 @@ public class FireStoreHandler {
             @Override
             public void onSuccess(DocumentSnapshot documentSnapshot) {
                 if (documentSnapshot.exists()){
-                    SellerData sellerData = documentSnapshot.toObject(SellerData.class);
+                    sellerData = documentSnapshot.toObject(SellerData.class);
                     accountExists = true;
 
                 }else{
@@ -71,6 +72,28 @@ public class FireStoreHandler {
                 }
 
 
+            }
+        })
+        .addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Log.d("ACCOUNT EXISTS: ", e.getMessage());
+            }
+        });
+        Log.d("ACCOUNT EXISTS: ", String.valueOf(accountExists));
+
+    }
+    public void getSingleUser(final String email,String type) {
+        DocumentReference user = db.collection(type).document(email);
+
+        user.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+            @Override
+            public void onSuccess(DocumentSnapshot documentSnapshot) {
+                if (documentSnapshot.exists()){
+                    SellerData sellerData = documentSnapshot.toObject(SellerData.class);
+                    setSellerData(sellerData);
+                }else{
+                }
             }
         })
         .addOnFailureListener(new OnFailureListener() {
@@ -108,5 +131,13 @@ public class FireStoreHandler {
                     "dateOfBirth", dateOfBirth,
                     "ic_No",ic_No
         );
+    }
+
+    public SellerData getSellerData() {
+        return sellerData;
+    }
+
+    public void setSellerData(SellerData sellerData) {
+        this.sellerData = sellerData;
     }
 }
