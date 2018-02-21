@@ -10,6 +10,7 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.SetOptions;
 
 import java.util.List;
 
@@ -33,8 +34,7 @@ public class FireStoreHandler {
         SellerData sellerData = new SellerData();
         sellerData.setFirstName(name);
         sellerData.setEmail(email);
-
-        db.collection("Buyer").document(email).set(sellerData)
+        db.collection("Buyer").document(email).set(sellerData,SetOptions.merge())
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void aVoid) {
