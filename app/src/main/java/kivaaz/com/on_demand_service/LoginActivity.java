@@ -245,7 +245,7 @@ public class LoginActivity extends AppCompatActivity {
                     @Override
                     public void onSuccess(AuthResult authResult) {
                         FirebaseUser user = mAuth.getCurrentUser();
-                        handler.addNewUser(email,nickname);
+                        handler.addNewUser(email,nickname,"Seller");
                         startActivity(new Intent(getApplicationContext(),MainActivity.class));
                     }
                 }).addOnFailureListener(new OnFailureListener() {
@@ -297,6 +297,7 @@ public class LoginActivity extends AppCompatActivity {
                             Log.d(TAG, "signInWithCredential:success");
                             FirebaseUser user = mAuth.getCurrentUser();
                             Toast.makeText(getBaseContext(),"Logged in Successfully " + user.getEmail(),Toast.LENGTH_SHORT).show();
+                            handler.addNewUser(user.getEmail(),user.getDisplayName(),"Seller");
                             startActivity(new Intent(getApplicationContext(),MainActivity.class));
                         } else {
                             // If sign in fails, display a message to the user.

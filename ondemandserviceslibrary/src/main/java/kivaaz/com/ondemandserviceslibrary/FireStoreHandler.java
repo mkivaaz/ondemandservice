@@ -24,21 +24,21 @@ public class FireStoreHandler {
 
     Context context;
     FirebaseFirestore db;
-
+    SellerData sellerData = null;
     public FireStoreHandler(Context context, FirebaseFirestore db) {
         this.context = context;
         this.db = db;
     }
 
-    public void addNewUser(String email, String name){
+    public void addNewUser(String email, String name, String type){
         SellerData sellerData = new SellerData();
         sellerData.setFirstName(name);
         sellerData.setEmail(email);
 
-        Boolean accountExist = readSingleUser(email);
+        SellerData accountExist = readSingleUser(email,type);
 
-        if(!accountExist){
-            db.collection("Buyer").document(email).set(sellerData,SetOptions.merge())
+        if(accountExist == null){
+            db.collection(type).document(email).set(sellerData,SetOptions.merge())
                     .addOnSuccessListener(new OnSuccessListener<Void>() {
                         @Override
                         public void onSuccess(Void aVoid) {
@@ -59,25 +59,28 @@ public class FireStoreHandler {
 
     }
 
-    public boolean readSingleUser(String email) {
-        final Boolean[] accountExists = new Boolean[1];
-        DocumentReference user = db.collection("Buyer").document(email);
+    public SellerData readSingleUser(String email, String type) {
+        DocumentReference user = db.collection(type).document(email);
         user.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
             @Override
             public void onSuccess(DocumentSnapshot documentSnapshot) {
-                SellerData sellerData = documentSnapshot.toObject(SellerData.class);
-                accountExists[0] = true;
+                if (documentSnapshot.exists()){
+                    sellerData = documentSnapshot.toObject(SellerData.class);
+                    Log.d("ACCOUNT EXISTS: ", "False");
+                }else{
+                    sellerData = null;
+                }
+
 
             }
         })
         .addOnFailureListener(new OnFailureListener() {
             @Override
             public void onFailure(@NonNull Exception e) {
-                Log.d("ACCOUNT EXISTS: ", "TRUE");
-                accountExists[0] = false;
+                Log.d("ACCOUNT EXISTS: ", e.getMessage());
             }
         });
-        return accountExists[0];
+        return sellerData;
     }
 
     public void updateUserDetails(List<String> userData) {
