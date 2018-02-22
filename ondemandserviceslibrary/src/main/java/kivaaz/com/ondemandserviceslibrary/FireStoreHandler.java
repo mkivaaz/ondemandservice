@@ -31,29 +31,16 @@ public class FireStoreHandler {
         this.db = db;
     }
 
-    public void addNewUser(SellerData data, String type){
+    public void addNewUser(SellerData data, String type, OnSuccessListener onSuccessListener, OnFailureListener onFailureListener){
 
         db.collection(type).document(data.getEmail()).set(data,SetOptions.merge())
-                .addOnSuccessListener(new OnSuccessListener<Void>() {
-                    @Override
-                    public void onSuccess(Void aVoid) {
-                        Toast.makeText(context, "User Registered",
-                                Toast.LENGTH_SHORT).show();
-                    }
-                })
-                .addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        Toast.makeText(context, "ERROR" +e.toString(),
-                                Toast.LENGTH_SHORT).show();
-                        Log.d("TAG", e.toString());
-                    }
-                });
+                .addOnSuccessListener(onSuccessListener)
+                .addOnFailureListener(onFailureListener);
 
 
     }
 
-    public void checkandSetUser(final SellerData data, final String type) {
+    public void checkandSetUser(final SellerData data, final String type, final OnSuccessListener successListener, final OnFailureListener failureListener) {
         DocumentReference user = db.collection(type).document(data.getEmail());
 
         user.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
@@ -65,7 +52,7 @@ public class FireStoreHandler {
 
                 }else{
                     accountExists = false;
-                    addNewUser(data,type);
+                    addNewUser(data,type,successListener,failureListener);
                 }
 
 
