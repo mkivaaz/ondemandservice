@@ -40,7 +40,7 @@ public class FireStoreHandler {
 
     }
 
-    public void checkandSetUser(final SellerData data, final String type,final OnSuccessListener checkSuccessListener, final OnSuccessListener successListener, final OnFailureListener failureListener) {
+    public void checkandSetUser(final SellerData data, final String type,final OnSuccessListener<DocumentSnapshot> checkSuccessListener, final OnSuccessListener successListener, final OnFailureListener failureListener) {
         DocumentReference user = db.collection(type).document(data.getEmail());
 
         user.get().addOnSuccessListener(checkSuccessListener)
