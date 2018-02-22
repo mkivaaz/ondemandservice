@@ -115,8 +115,9 @@ public class FireStoreHandler {
         String mobileNo = ((String)userData.get(8)).toString();
         String dateOfBirth = ((String)userData.get(9)).toString();
         String ic_No = ((String)userData.get(10)).toString();
+        String gst_No = ((String)userData.get(11)).toString();
         DocumentReference user = db.collection(type).document(email2);
-        user.update("company_Name", company_name, "company_address", companyaddress, "company_About", company_about, "company_imgURL", company_imgURL, "ssm_RegisterNo", ssm_regisNo, "firstName", firstName, "lastName", lastName, "mobileNo", mobileNo, "dateOfBirth", dateOfBirth, "ic_No", ic_No);
+        user.update("company_Name", company_name, "company_address", companyaddress, "company_About", company_about, "company_imgURL", company_imgURL, "ssm_RegisterNo", ssm_regisNo,"gstNo", gst_No, "firstName", firstName, "lastName", lastName, "mobileNo", mobileNo, "dateOfBirth", dateOfBirth, "ic_No", ic_No);
         Toast.makeText(context,"Info Saved Successfully",Toast.LENGTH_SHORT).show();
 
     }
