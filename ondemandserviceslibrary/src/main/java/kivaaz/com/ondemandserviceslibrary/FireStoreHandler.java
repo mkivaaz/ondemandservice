@@ -40,31 +40,16 @@ public class FireStoreHandler {
 
     }
 
-    public void checkandSetUser(final SellerData data, final String type, final OnSuccessListener successListener, final OnFailureListener failureListener) {
+    public void checkandSetUser(final SellerData data, final String type,final OnSuccessListener checkSuccessListener, final OnSuccessListener successListener, final OnFailureListener failureListener) {
         DocumentReference user = db.collection(type).document(data.getEmail());
 
-        user.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
-            @Override
-            public void onSuccess(DocumentSnapshot documentSnapshot) {
-                if (documentSnapshot.exists()){
-                    sellerData = documentSnapshot.toObject(SellerData.class);
-                    accountExists = true;
-
-                }else{
-                    accountExists = false;
-                    addNewUser(data,type,successListener,failureListener);
-                }
-
-
-            }
-        })
+        user.get().addOnSuccessListener(checkSuccessListener)
         .addOnFailureListener(new OnFailureListener() {
             @Override
             public void onFailure(@NonNull Exception e) {
                 Log.d("ACCOUNT EXISTS: ", e.getMessage());
             }
         });
-        Log.d("ACCOUNT EXISTS: ", String.valueOf(accountExists));
 
     }
     public void getSingleUser(final String email,String type) {
