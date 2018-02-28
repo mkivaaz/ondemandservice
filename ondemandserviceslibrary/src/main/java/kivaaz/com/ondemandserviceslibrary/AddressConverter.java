@@ -101,6 +101,9 @@ public class AddressConverter {
                 Log.d("ADDRESS: ", googleMapUrl);
                 URL url = new URL(googleMapUrl);
                 conn = (HttpURLConnection) url.openConnection();
+                conn.setConnectTimeout(15000);
+                conn.setReadTimeout(15000);
+
                 InputStreamReader in = new InputStreamReader(conn.getInputStream());
                 int read;
                 char[] buff = new char[1024];
