@@ -124,7 +124,7 @@ public class AddressConverter {
             // TODO Auto-generated method stub
             super.onPostExecute(result);
             try {
-
+                    Intent intent = new Intent(FirebaseConstants.FIREBASE_GEOCODE_INTENT);
                     JSONObject jsonObj = new JSONObject(result.toString());
                     JSONArray resultJsonArray = jsonObj.getJSONArray("results");
                     Log.d("JSON ARRAY: ", resultJsonArray.toString());
@@ -149,14 +149,14 @@ public class AddressConverter {
                     LatLng point = new LatLng(lat, lng);
                     setGeocode(point);
 
-                    Intent intent = new Intent(FirebaseConstants.FIREBASE_GEOCODE_INTENT);
+
                     intent.putExtra(DataIntent.LOCATION_LATITUDE,point.latitude);
                     intent.putExtra(DataIntent.LOCATION_LONGITUDE,point.longitude);
-                    LocalBroadcastManager.getInstance(context).sendBroadcast(intent);
+
 
                     Log.d("ADDRESS TO GEOCODE: ", "Latitude - " + point.latitude + ", Longitude - " +point.longitude);
                 }
-
+                LocalBroadcastManager.getInstance(context).sendBroadcast(intent);
 
             } catch (JSONException e) {
                 // TODO Auto-generated catch block
