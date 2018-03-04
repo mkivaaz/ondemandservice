@@ -132,29 +132,29 @@ public class AddressConverter {
                     // Extract the Place descriptions from the results
                     // resultList = new ArrayList<String>(resultJsonArray.length());
                     if(resultJsonArray.length() > 0){
-                    JSONObject before_geometry_jsonObj = resultJsonArray.getJSONObject(0);
+                        JSONObject before_geometry_jsonObj = resultJsonArray.getJSONObject(0);
 
-                    JSONObject geometry_jsonObj = before_geometry_jsonObj.getJSONObject("geometry");
+                        JSONObject geometry_jsonObj = before_geometry_jsonObj.getJSONObject("geometry");
 
-                    JSONObject location_jsonObj = geometry_jsonObj.getJSONObject("location");
+                        JSONObject location_jsonObj = geometry_jsonObj.getJSONObject("location");
 
-                    String lat_helper = location_jsonObj.getString("lat");
-                    lat = Double.valueOf(lat_helper);
-
-
-                    String lng_helper = location_jsonObj.getString("lng");
-                    lng = Double.valueOf(lng_helper);
+                        String lat_helper = location_jsonObj.getString("lat");
+                        lat = Double.valueOf(lat_helper);
 
 
-                    LatLng point = new LatLng(lat, lng);
-                    setGeocode(point);
+                        String lng_helper = location_jsonObj.getString("lng");
+                        lng = Double.valueOf(lng_helper);
 
 
-                    intent.putExtra(DataIntent.LOCATION_LATITUDE,point.latitude);
-                    intent.putExtra(DataIntent.LOCATION_LONGITUDE,point.longitude);
+                        LatLng point = new LatLng(lat, lng);
+                        setGeocode(point);
 
 
-                    Log.d("ADDRESS TO GEOCODE: ", "Latitude - " + point.latitude + ", Longitude - " +point.longitude);
+                        intent.putExtra(DataIntent.LOCATION_LATITUDE,point.latitude);
+                        intent.putExtra(DataIntent.LOCATION_LONGITUDE,point.longitude);
+
+
+                        Log.d("ADDRESS TO GEOCODE: ", "Latitude - " + point.latitude + ", Longitude - " +point.longitude);
                 }
                 LocalBroadcastManager.getInstance(context).sendBroadcast(intent);
 

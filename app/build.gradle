@@ -2,6 +2,10 @@ apply plugin: 'com.android.application'
 
 
 android {
+
+    packagingOptions {
+        exclude 'META-INF/DEPENDENCIES'
+    }
     compileSdkVersion 27
     defaultConfig {
         applicationId "kivaaz.com.on_demand_service"
@@ -17,6 +21,7 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+    useLibrary 'org.apache.http.legacy'
 }
 
 dependencies {
@@ -37,11 +42,4 @@ dependencies {
     compile 'com.google.firebase:firebase-firestore:11.8.0'
     
 }
-
-
-
-
-
-
-
 apply plugin: 'com.google.gms.google-services'
