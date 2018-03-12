@@ -1,4 +1,4 @@
-package kivaaz.com.ondemandserviceslibrary.UserData;
+package kivaaz.com.ondemandserviceslibrary.Model.Restaurant;
 
 import java.util.List;
 

@@ -1,4 +1,4 @@
-package kivaaz.com.ondemandserviceslibrary.UserData;
+package kivaaz.com.ondemandserviceslibrary.Model.Seller;
 
 /**
  * Created by Muguntan on 2/21/2018.

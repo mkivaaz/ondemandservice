@@ -1,4 +1,4 @@
-package kivaaz.com.ondemandserviceslibrary.Model;
+package kivaaz.com.ondemandserviceslibrary.Model.Order;
 
 import java.util.List;
 import java.util.Map;
@@ -12,6 +12,10 @@ public class OrderModel {
     String orderStatus;
     String rider;
     String buyer;
+    String delivery_date;
+    String delivery_time;
+    String payment_type;
+    String receipt_img_URL;
     Double totalPrice;
 
     public OrderModel() {
@@ -62,5 +66,37 @@ public class OrderModel {
 
     public void setBuyer(String buyer) {
         this.buyer = buyer;
+    }
+
+    public String getDelivery_date() {
+        return delivery_date;
+    }
+
+    public void setDelivery_date(String delivery_date) {
+        this.delivery_date = delivery_date;
+    }
+
+    public String getDelivery_time() {
+        return delivery_time;
+    }
+
+    public void setDelivery_time(String delivery_time) {
+        this.delivery_time = delivery_time;
+    }
+
+    public String getPayment_type() {
+        return payment_type;
+    }
+
+    public void setPayment_type(String payment_type) {
+        this.payment_type = payment_type;
+    }
+
+    public String getReceipt_img_URL() {
+        return receipt_img_URL;
+    }
+
+    public void setReceipt_img_URL(String receipt_img_URL) {
+        this.receipt_img_URL = receipt_img_URL;
     }
 }

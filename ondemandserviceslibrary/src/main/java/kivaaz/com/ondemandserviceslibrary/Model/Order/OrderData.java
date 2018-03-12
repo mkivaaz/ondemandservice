@@ -1,6 +1,6 @@
-package kivaaz.com.ondemandserviceslibrary.Model;
+package kivaaz.com.ondemandserviceslibrary.Model.Order;
 
-import kivaaz.com.ondemandserviceslibrary.UserData.MainDish;
+import kivaaz.com.ondemandserviceslibrary.Model.Restaurant.MainDish;
 
 /**
  * Created by Muguntan on 3/11/2018.

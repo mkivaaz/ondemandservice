@@ -14,7 +14,7 @@ import com.google.firebase.firestore.SetOptions;
 
 import java.util.List;
 
-import kivaaz.com.ondemandserviceslibrary.UserData.SellerData;
+import kivaaz.com.ondemandserviceslibrary.Model.Seller.SellerData;
 
 /**
  * Created by Muguntan on 2/21/2018.
