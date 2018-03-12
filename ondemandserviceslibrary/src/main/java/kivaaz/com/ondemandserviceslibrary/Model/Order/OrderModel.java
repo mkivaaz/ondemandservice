@@ -16,6 +16,7 @@ public class OrderModel {
     String delivery_time;
     String payment_type;
     String receipt_img_URL;
+    String foodReady;
     Double totalPrice;
 
     public OrderModel() {
@@ -98,5 +99,13 @@ public class OrderModel {
 
     public void setReceipt_img_URL(String receipt_img_URL) {
         this.receipt_img_URL = receipt_img_URL;
+    }
+
+    public String getFoodReady() {
+        return foodReady;
+    }
+
+    public void setFoodReady(String foodReady) {
+        this.foodReady = foodReady;
     }
 }
