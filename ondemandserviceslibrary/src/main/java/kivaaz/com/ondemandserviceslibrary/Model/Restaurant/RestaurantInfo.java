@@ -1,46 +1,43 @@
 package kivaaz.com.ondemandserviceslibrary.Model.Restaurant;
 
+import com.google.firebase.firestore.IgnoreExtraProperties;
+
 import java.util.List;
 
 /**
  * Created by Muguntan on 3/4/2018.
  */
+@IgnoreExtraProperties
+@com.google.firebase.database.IgnoreExtraProperties
 public class RestaurantInfo {
 
-    String restaurant_Name;
-    String restaurant_ImgURl;
-    List<String> category;
-    String gstNo;
-    String business_Hours;
-    String delivery_Time;
-    String promotion;
-    Float ratigns;
+    private String name;
+    private String imgURl;
+    private List<String> category;
+    private String businessHours;
+    private String deliveryTime;
+    private String promotion;
+    private float ratings;
+    private double lat;
+    private double lon;
 
     public RestaurantInfo() {
     }
 
-    public String getGstNo() {
-        return gstNo;
+    public String getName() {
+        return name;
     }
 
-    public void setGstNo(String gstNo) {
-        this.gstNo = gstNo;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public String getRestaurant_Name() {
-        return restaurant_Name;
+    public String getImgURl() {
+        return imgURl;
     }
 
-    public void setRestaurant_Name(String restaurant_Name) {
-        this.restaurant_Name = restaurant_Name;
-    }
-
-    public String getRestaurant_ImgURl() {
-        return restaurant_ImgURl;
-    }
-
-    public void setRestaurant_ImgURl(String restaurant_ImgURl) {
-        this.restaurant_ImgURl = restaurant_ImgURl;
+    public void setImgURl(String imgURl) {
+        this.imgURl = imgURl;
     }
 
     public List<String> getCategory() {
@@ -51,20 +48,20 @@ public class RestaurantInfo {
         this.category = category;
     }
 
-    public String getBusiness_Hours() {
-        return business_Hours;
+    public String getBusinessHours() {
+        return businessHours;
     }
 
-    public void setBusiness_Hours(String business_Hours) {
-        this.business_Hours = business_Hours;
+    public void setBusinessHours(String businessHours) {
+        this.businessHours = businessHours;
     }
 
-    public String getDelivery_Time() {
-        return delivery_Time;
+    public String getDeliveryTime() {
+        return deliveryTime;
     }
 
-    public void setDelivery_Time(String delivery_Time) {
-        this.delivery_Time = delivery_Time;
+    public void setDeliveryTime(String deliveryTime) {
+        this.deliveryTime = deliveryTime;
     }
 
     public String getPromotion() {
@@ -75,11 +72,27 @@ public class RestaurantInfo {
         this.promotion = promotion;
     }
 
-    public Float getRatigns() {
-        return ratigns;
+    public float getRatings() {
+        return ratings;
     }
 
-    public void setRatigns(Float ratigns) {
-        this.ratigns = ratigns;
+    public void setRatings(float ratings) {
+        this.ratings = ratings;
+    }
+
+    public double getLat() {
+        return lat;
+    }
+
+    public void setLat(double lat) {
+        this.lat = lat;
+    }
+
+    public double getLon() {
+        return lon;
+    }
+
+    public void setLon(double lon) {
+        this.lon = lon;
     }
 }
