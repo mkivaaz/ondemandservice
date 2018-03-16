@@ -6,21 +6,23 @@ package kivaaz.com.ondemandserviceslibrary.Model.Seller;
 
 public class SellerData {
 
-    String company_Name;
-    String company_imgURL;
-    String company_address;
-    String company_About;
-    String ssm_RegisterNo;
-    String gstNo;
-    String ssm_imgURL;
-    String firstName;
-    String lastName;
-    String email;
-    String mobileNo;
-    String dateOfBirth;
-    String ic_No;
-    String ic_imgURL;
-    String icSelfie_imgURL;
+    private String company_Name;
+    private String company_imgURL;
+    private String company_address;
+    private String company_About;
+    private String ssm_RegisterNo;
+    private String gstNo;
+    private String ssm_imgURL;
+    private String firstName;
+    private String lastName;
+    private String email;
+    private String mobileNo;
+    private String dateOfBirth;
+    private String ic_No;
+    private String ic_imgURL;
+    private String icSelfie_imgURL;
+
+    private String token;
 
     public SellerData() {
     }
@@ -156,5 +158,13 @@ public class SellerData {
 
     public void setGstNo(String gstNo) {
         this.gstNo = gstNo;
+    }
+
+    public String getToken() {
+        return token;
+    }
+
+    public void setToken(String token) {
+        this.token = token;
     }
 }
