@@ -1,45 +1,49 @@
 package kivaaz.com.ondemandserviceslibrary.Model.Restaurant;
 
+import com.google.firebase.firestore.Exclude;
+import com.google.firebase.firestore.IgnoreExtraProperties;
+
 import java.util.List;
 import java.util.Map;
 
 /**
  * Created by Muguntan on 3/4/2018.
  */
-
+@IgnoreExtraProperties
 public class MainDish {
 
-    String food_Name;
-    List<String> food_Category;
-    String price;
-    List<Map<String,String>> addOns;
-    String food_ImgURL;
-    String available;
+    private String name;
+    private List<String> categoriess;
+    private double price;
+    private List<Map<String,String>> addOns;
+    private String imgURL;
+    private boolean available;
+    private DishType type;
 
     public MainDish() {
     }
 
-    public String getFood_Name() {
-        return food_Name;
+    public String getName() {
+        return name;
     }
 
-    public void setFood_Name(String food_Name) {
-        this.food_Name = food_Name;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public List<String> getFood_Category() {
-        return food_Category;
+    public List<String> getCategoriess() {
+        return categoriess;
     }
 
-    public void setFood_Category(List<String> food_Category) {
-        this.food_Category = food_Category;
+    public void setCategoriess(List<String> categoriess) {
+        this.categoriess = categoriess;
     }
 
-    public String getPrice() {
+    public double getPrice() {
         return price;
     }
 
-    public void setPrice(String price) {
+    public void setPrice(double price) {
         this.price = price;
     }
 
@@ -51,19 +55,47 @@ public class MainDish {
         this.addOns = addOns;
     }
 
-    public String getFood_ImgURL() {
-        return food_ImgURL;
+    public String getImgURL() {
+        return imgURL;
     }
 
-    public void setFood_ImgURL(String food_ImgURL) {
-        this.food_ImgURL = food_ImgURL;
+    public void setImgURL(String imgURL) {
+        this.imgURL = imgURL;
     }
 
-    public String getAvailable() {
+    public boolean isAvailable() {
         return available;
     }
 
-    public void setAvailable(String available) {
+    public void setAvailable(boolean available) {
         this.available = available;
+    }
+
+    @Exclude
+    public DishType getTypeVal() {
+        return type;
+    }
+
+    @Exclude
+    public void setTypeVal(DishType type) {
+        this.type = type;
+    }
+
+    public String getType() {
+
+        if(type == null) {
+            return null;
+        }
+
+        return type.name();
+    }
+
+    public void setType(String type) {
+
+        if(type == null) {
+            this.type = null;
+        } else {
+            this.type = DishType.valueOf(type);
+        }
     }
 }
