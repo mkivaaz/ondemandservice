@@ -3,11 +3,8 @@ package kivaaz.com.ondemandserviceslibrary.Model.Order;
 import com.google.firebase.firestore.IgnoreExtraProperties;
 
 import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.Map;
 
-import kivaaz.com.ondemandserviceslibrary.Model.Restaurant.MainDish;
+import kivaaz.com.ondemandserviceslibrary.Model.Restaurant.Menu;
 
 /**
  * Created by Muguntan on 3/11/2018.
@@ -16,7 +13,7 @@ import kivaaz.com.ondemandserviceslibrary.Model.Restaurant.MainDish;
 public class OrderModel {
 
     private String id;
-    private ArrayList<MainDish> orderedFoods;
+    private ArrayList<Menu> orderedFoods;
     private OrderStatus orderStatus;
     private String riderId;
     private String buyerId;
@@ -39,11 +36,11 @@ public class OrderModel {
         this.id = id;
     }
 
-    public ArrayList<MainDish> getOrderedFoods() {
+    public ArrayList<Menu> getOrderedFoods() {
         return orderedFoods;
     }
 
-    public void setOrderedFoods(ArrayList<MainDish> orderedFoods) {
+    public void setOrderedFoods(ArrayList<Menu> orderedFoods) {
         this.orderedFoods = orderedFoods;
     }
 

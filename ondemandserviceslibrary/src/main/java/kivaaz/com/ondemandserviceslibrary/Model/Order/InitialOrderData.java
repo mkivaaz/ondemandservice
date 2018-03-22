@@ -1,13 +1,14 @@
 package kivaaz.com.ondemandserviceslibrary.Model.Order;
 
-import kivaaz.com.ondemandserviceslibrary.Model.Restaurant.MainDish;
+import kivaaz.com.ondemandserviceslibrary.Model.Restaurant.Menu;
 
 /**
  * Created by Muguntan on 3/9/2018.
  */
 
 public class InitialOrderData {
-    MainDish dish;
+    
+    Menu dish;
     int quantity;
     String buyerInstruction;
     String seller_email;
@@ -25,17 +26,17 @@ public class InitialOrderData {
         this.buyerInstruction = buyerInstruction;
     }
 
-    public InitialOrderData(MainDish dish, int quantity, String buyerInstruction) {
+    public InitialOrderData(Menu dish, int quantity, String buyerInstruction) {
         this.dish = dish;
         this.quantity = quantity;
         this.buyerInstruction = buyerInstruction;
     }
 
-    public MainDish getDish() {
+    public Menu getDish() {
         return dish;
     }
 
-    public void setDish(MainDish dish) {
+    public void setDish(Menu dish) {
         this.dish = dish;
     }
 

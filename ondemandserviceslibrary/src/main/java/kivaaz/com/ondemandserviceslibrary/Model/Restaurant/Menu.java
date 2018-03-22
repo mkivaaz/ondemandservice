@@ -10,7 +10,7 @@ import java.util.Map;
  * Created by Muguntan on 3/4/2018.
  */
 @IgnoreExtraProperties
-public class MainDish {
+public class Menu {
 
     private String name;
     private List<String> categoriess;
@@ -18,9 +18,9 @@ public class MainDish {
     private List<Map<String,String>> addOns;
     private String imgURL;
     private boolean available;
-    private DishType type;
+    private MenuType type;
 
-    public MainDish() {
+    public Menu() {
     }
 
     public String getName() {
@@ -72,12 +72,12 @@ public class MainDish {
     }
 
     @Exclude
-    public DishType getTypeVal() {
+    public MenuType getTypeVal() {
         return type;
     }
 
     @Exclude
-    public void setTypeVal(DishType type) {
+    public void setTypeVal(MenuType type) {
         this.type = type;
     }
 
@@ -95,7 +95,7 @@ public class MainDish {
         if(type == null) {
             this.type = null;
         } else {
-            this.type = DishType.valueOf(type);
+            this.type = MenuType.valueOf(type);
         }
     }
 }

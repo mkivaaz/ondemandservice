@@ -1,13 +1,13 @@
 package kivaaz.com.ondemandserviceslibrary.Model.Order;
 
-import kivaaz.com.ondemandserviceslibrary.Model.Restaurant.MainDish;
+import kivaaz.com.ondemandserviceslibrary.Model.Restaurant.Menu;
 
 /**
  * Created by Muguntan on 3/11/2018.
  */
 
 public class OrderData {
-    MainDish dish;
+    Menu dish;
     int quantity;
     String buyerInstruction;
     String seller_email;
