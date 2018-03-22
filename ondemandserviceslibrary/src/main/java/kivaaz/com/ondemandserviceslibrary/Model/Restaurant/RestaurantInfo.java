@@ -19,7 +19,6 @@ public class RestaurantInfo {
     private String promotion;
     private float ratings;
     private String unitNo;
-    private String buildingName;
     private String address;
     private double lat;
     private double lon;
@@ -97,14 +96,6 @@ public class RestaurantInfo {
 
     public void setUnitNo(String unitNo) {
         this.unitNo = unitNo;
-    }
-
-    public String getBuildingName() {
-        return buildingName;
-    }
-
-    public void setBuildingName(String buildingName) {
-        this.buildingName = buildingName;
     }
 
     public String getAddress() {
