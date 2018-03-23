@@ -7,7 +7,7 @@ import kivaaz.com.ondemandserviceslibrary.Model.Restaurant.Menu;
  */
 
 public class InitialOrderData {
-    
+
     Menu dish;
     int quantity;
     String buyerInstruction;

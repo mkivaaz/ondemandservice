@@ -13,6 +13,7 @@ import java.util.Map;
 public class Menu {
 
     private String name;
+    private String by;
     private List<String> categoriess;
     private double price;
     private List<Map<String,String>> addOns;
@@ -33,6 +34,14 @@ public class Menu {
 
     public List<String> getCategoriess() {
         return categoriess;
+    }
+
+    public String getBy() {
+        return by;
+    }
+
+    public void setBy(String by) {
+        this.by = by;
     }
 
     public void setCategoriess(List<String> categoriess) {
