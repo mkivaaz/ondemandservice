@@ -18,7 +18,7 @@ public class Menu {
     private double price;
     private List<Map<String,String>> addOns;
     private String imgURL;
-    private boolean available;
+    private boolean soldout;
     private MenuType type;
 
     public Menu() {
@@ -72,12 +72,12 @@ public class Menu {
         this.imgURL = imgURL;
     }
 
-    public boolean isAvailable() {
-        return available;
+    public boolean isSoldout() {
+        return soldout;
     }
 
-    public void setAvailable(boolean available) {
-        this.available = available;
+    public void setSoldout(boolean soldout) {
+        this.soldout = soldout;
     }
 
     @Exclude
