@@ -14,14 +14,13 @@ public class RestaurantInfo {
     private String name;
     private String imgURl;
     private List<String> category;
-    private String businessHours;
     private String deliveryTime;
     private String promotion;
     private float ratings;
     private String unitNo;
     private String address;
-    private String startTime;
-    private String closeTime;
+    private String openingTime;
+    private String closingTime;
     private double lat;
     private double lon;
 
@@ -50,14 +49,6 @@ public class RestaurantInfo {
 
     public void setCategory(List<String> category) {
         this.category = category;
-    }
-
-    public String getBusinessHours() {
-        return businessHours;
-    }
-
-    public void setBusinessHours(String businessHours) {
-        this.businessHours = businessHours;
     }
 
     public String getDeliveryTime() {
@@ -108,20 +99,20 @@ public class RestaurantInfo {
         this.address = address;
     }
 
-    public String getStartTime() {
-        return startTime;
+    public String getOpeningTime() {
+        return openingTime;
     }
 
-    public void setStartTime(String startTime) {
-        this.startTime = startTime;
+    public void setOpeningTime(String openingTime) {
+        this.openingTime = openingTime;
     }
 
-    public String getCloseTime() {
-        return closeTime;
+    public String getClosingTime() {
+        return closingTime;
     }
 
-    public void setCloseTime(String closeTime) {
-        this.closeTime = closeTime;
+    public void setClosingTime(String closingTime) {
+        this.closingTime = closingTime;
     }
 
     public double getLon() {
