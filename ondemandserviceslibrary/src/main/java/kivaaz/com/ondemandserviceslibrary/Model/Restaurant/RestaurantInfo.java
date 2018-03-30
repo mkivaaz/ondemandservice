@@ -20,6 +20,8 @@ public class RestaurantInfo {
     private float ratings;
     private String unitNo;
     private String address;
+    private String startTime;
+    private String closeTime;
     private double lat;
     private double lon;
 
@@ -104,6 +106,22 @@ public class RestaurantInfo {
 
     public void setAddress(String address) {
         this.address = address;
+    }
+
+    public String getStartTime() {
+        return startTime;
+    }
+
+    public void setStartTime(String startTime) {
+        this.startTime = startTime;
+    }
+
+    public String getCloseTime() {
+        return closeTime;
+    }
+
+    public void setCloseTime(String closeTime) {
+        this.closeTime = closeTime;
     }
 
     public double getLon() {
